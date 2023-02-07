@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const sequelize = require('../../config/connection');
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
@@ -21,12 +20,34 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 
 // get one product
-router.get('/:id', (req, res) => {
-  // find a single product by its `id`
+router.get('/:id', async (req, res) => {
+    try {
+      const ProductData = await Product.findByPk(req.params.id, {
+        include: [{ model: Category }, {model: Tag}],
+      });
+      if (!ProductData) {
+        res.status(404).json({ message:'Product not found!'});
+      return;
+      }
+      res.status(200).json(ProductData);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+});  
+
+// find a single product by its `id`
   // be sure to include its associated Category and Tag data
-});
+
 
 // create new product
+//  router.post('/', async (req, res) => {
+//     try {
+//       const productData = await Product.create(req.body);
+//       res.status(200).json(productData);
+//     } catch (err) {
+//       res.status(400).json(err);
+//     }
+// });
 router.post('/', (req, res) => {
   /* req.body should look like this...
     {
@@ -56,7 +77,7 @@ router.post('/', (req, res) => {
       console.log(err);
       res.status(400).json(err);
     });
-});
+  })
 
 // update product
 router.put('/:id', (req, res) => {
@@ -100,8 +121,14 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+router.delete('/:id', async (req, res) => {
+  const productDelete = await Category.destroy ({
+    where: {
+      id: req.params.id,
+    }
+  });
+  res.status(200).json(productDelete);
 });
 
 module.exports = router;
