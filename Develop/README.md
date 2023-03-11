@@ -26,19 +26,19 @@ Shop Away, an e-commerce backend, allows users to make API requests to an expres
 ## Usage
 Use API routes to view, create, update and delete e-commerce data.
 ### GET all tags
-![Alt text](./develop/assets/all%20tags.png)
+![Alt text](./assets/all%20tags.png)
 ### GET specific tag
-![Alt text](./Develop/assets/specific%20tag.png)
+![Alt text](./assets/specific%20tag.png)
 ### POST new tag
-![Alt text](./Develop/assets/new%20tag.png)
+![Alt text](./assets/new%20tag.png)
 ### PUT update tag
-![Alt text](./Develop/assets/update%20tag.png)
+![Alt text](./assets/update%20tag.png)
 ### DEL delete tag
-![Alt text](./Develop/assets/delete%20tag.png)
+![Alt text](./assets/delete%20tag.png)
 
 ## Code Snippet
 The below code imports sequelize models and methods to establish relationships between Product, Category, Tag, and ProductTag MySQL tables. 
-![Alt text](./Develop/assets/carbon%20(1).png)
+![Alt text](./assets/carbon%20(1).png)
 
 ## Author Info
 
